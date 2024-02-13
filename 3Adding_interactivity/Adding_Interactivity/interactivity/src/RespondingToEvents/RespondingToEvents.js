@@ -10,6 +10,7 @@ export default function Respond(){
 function Toolbar({onPlayMovie,onUploadImage}){
     return(
         <div>
+            <h1>Responding To Events</h1>
             <Button onClick = {onPlayMovie}>
                 Play Movie
             </Button>

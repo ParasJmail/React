@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import { sculptureList } from './data'
+import './State.css'
 
 export default function State(){
     const [index, setIndex] = useState(0);
@@ -22,11 +23,13 @@ export default function State(){
 
     return(
         <>
+            <h1>Using State</h1>
             <button onClick={handleNextClick}>
                 Next
             </button>
             <h2>
-                <i>{sculpture.name}</i> by {sculpture.artist}
+                <i>{sculpture.name}</i> 
+                by {sculpture.artist}
             </h2>
             <h3>
                 ({index} of {sculptureList.length})
