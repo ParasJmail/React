@@ -26,3 +26,5 @@ State: a component’s memory
     const [index, setIndex] = useState(0);
     
     const [showMore, setShowMore] = useState(false);
+
+    Here is how an image gallery uses and updates state on click:
