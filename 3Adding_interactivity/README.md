@@ -27,4 +27,22 @@ State: a component’s memory
     
     const [showMore, setShowMore] = useState(false);
 
-    Here is how an image gallery uses and updates state on click:
+    Here is how an image gallery uses and updates state on click: State.js
+
+Render and commit 
+    Before your components are displayed on the screen, they must be rendered by React. Understanding the steps in this process will help you think about how your code executes and explain its behavior.
+
+    Imagine that your components are cooks in the kitchen, assembling tasty dishes from ingredients. In this scenario, React is the waiter who puts in requests from customers and brings them their orders. This process of requesting and serving UI has three steps:
+
+    1. Triggering a render (delivering the diner’s order to the kitchen)
+    2. Rendering the component (preparing the order in the kitchen)
+    3. Committing to the DOM (placing the order on the table)
+
+State as a snapshot 
+    Unlike regular JavaScript variables, React state behaves more like a snapshot. Setting it does not change the state variable you already have, but instead triggers a re-render. This can be surprising at first!
+
+    console.log(count);  // 0
+    setCount(count + 1); // Request a re-render with 1
+    console.log(count);  // Still 0!
+
+    This behavior help you avoid subtle bugs. Here is a little chat app. Try to guess what happens if you press “Send” first and then change the recipient to Bob. Whose name will appear in the alert five seconds later? : Snapshot.js
