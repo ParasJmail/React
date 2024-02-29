@@ -3,11 +3,12 @@ export default function Respond(){
         <Toolbar 
         onPlayMovie={()=>alert('Playing')}
         onUploadImage={()=>alert('Uploading')}
+        Paras={()=>alert('Paras responding')}
         />
     );
 }
 
-function Toolbar({onPlayMovie,onUploadImage}){
+function Toolbar({onPlayMovie,onUploadImage,Paras}){
     return(
         <div>
             <h1>Responding To Events</h1>
@@ -16,6 +17,9 @@ function Toolbar({onPlayMovie,onUploadImage}){
             </Button>
             <Button onClick = {onUploadImage}>
                 Upload Image
+            </Button>
+            <Button onClick={Paras}>
+                Paras Own Response
             </Button>
         </div>
     );
