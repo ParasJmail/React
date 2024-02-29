@@ -8,7 +8,8 @@ export default function Counter(){
     }
 
     return(
-        <>
+        <>  
+        <h1>Queueing a series of state updates </h1>
             <button onClick={()=> increment()}>
             +1
             </button>

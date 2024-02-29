@@ -82,4 +82,14 @@ Queueing a series of state updates
     setScore(score + 1); // setScore(0 + 1);
     console.log(score);  // 0
 
-    You can fix this by passing an updater function when setting state. Notice how replacing setScore(score + 1) with setScore(s => s + 1) fixes the “+3” button. This lets you queue multiple state updates.
+    You can fix this by passing an updater function when setting state. Notice how replacing setScore(score + 1) with setScore(s => s + 1) fixes the “+3” button. This lets you queue multiple state updates. For Code Queue.js.
+
+Updating objects in state 
+    State can hold any kind of JavaScript value, including objects. But you shouldn’t change objects and arrays that you hold in the React state directly. Instead, when you want to update an object and array, you need to create a new one (or make a copy of an existing one), and then update the state to use that copy.
+
+    Usually, you will use the ... spread syntax to copy objects and arrays that you want to change. For example, updating a nested object could look like this: Update.js
+
+    If copying objects in code gets tedious, you can use a library like Immer to reduce repetitive code: ImmerUpdate.js
+
+Updating arrays in state 
+    Arrays are another type of mutable JavaScript objects you can store in state and should treat as read-only. Just like with objects, when you want to update an array stored in state, you need to create a new one (or make a copy of an existing one), and then set state to use the new array:
