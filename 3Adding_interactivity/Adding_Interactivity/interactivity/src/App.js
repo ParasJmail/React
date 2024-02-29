@@ -7,6 +7,7 @@ import Counter from './Queueingaseriesofstateupdates/Queue';
 import UpdateForm from './Updatingobjectsinstate/Update';
 import ImmerForm from './Updatingobjectsinstate/ImmerUpdate';
 import BucketList from './Updatingarraysinstate/UpdateArray';
+import BucketListImmer from './Updatingarraysinstate/UpdateArrayImmer';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <UpdateForm />
       <ImmerForm />
       <BucketList />
+      <BucketListImmer />
     </div>
   );
 }

@@ -1,31 +1,29 @@
 import {useState} from 'react';
+import {useImmer} from 'use-immer';
 
 const initialList = [
-    {id:0, title: 'Paras Jaitly', seen: false},
-    {id:1, title: 'Paras', seen: false},
-    {id:2, title: 'Jaitly', seen: true},
+    {id:0, title:'Paras Jaitly', seen:false},
+    {id:1, title:'Paras', seen:false},
+    {id:2, title:'Paras N Jaitly', seen:true},
 ];
 
-export default function BucketList(){
-    const [list,setList] = useState(
-        initialList
-    );
+export default function BucketListImmer(){
+    const [list,updateList] = useImmer(initialList);
 
     function handleToggle(artworkId,nextSeen){
-        setList(list.map(artwork=>{
-            if(artwork.id === artworkId){
-                return {...artwork,seen:nextSeen};
-            }else{
-                return artwork;
-            }
-        }));
+        updateList(draft=>{
+            const artwork = draft.find(a=>
+                a.id === artworkId
+                );
+            artwork.seen = nextSeen;
+        });
     }
 
     return(
-        <>
-            <h1>Updating arrays in state</h1>
+        <>  
+            <h1>Updating arrays in state : Use a library like Immer to reduce repetitive code</h1>
             <h1>Art Bucket List</h1>
-            <h2>My List of art to see</h2>
+            <h2>My list of art to see</h2>
             <ItemList
             artwork={list}
             onToggle={handleToggle}
@@ -50,10 +48,9 @@ function ItemList({artwork,onToggle}){
                                 );
                             }}
                         />
-                        {artwork.title}
                     </label>
                 </li>
             ))}
         </ul>
-    );
+    )
 }

@@ -92,4 +92,6 @@ Updating objects in state
     If copying objects in code gets tedious, you can use a library like Immer to reduce repetitive code: ImmerUpdate.js
 
 Updating arrays in state 
-    Arrays are another type of mutable JavaScript objects you can store in state and should treat as read-only. Just like with objects, when you want to update an array stored in state, you need to create a new one (or make a copy of an existing one), and then set state to use the new array:
+    Arrays are another type of mutable JavaScript objects you can store in state and should treat as read-only. Just like with objects, when you want to update an array stored in state, you need to create a new one (or make a copy of an existing one), and then set state to use the new array: UpdateArray.js
+
+    If copying arrays in code gets tedious, you can use a library like Immer to reduce repetitive code: UpdateArrayImmer.js
