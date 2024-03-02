@@ -4,8 +4,11 @@ export default function Button(){
     }
 
     return(
+        <>
+        <h1>Adding event handlers</h1>
         <button onClick={handleClick}>
             Click Me
         </button>
+        </>
     );
 }
