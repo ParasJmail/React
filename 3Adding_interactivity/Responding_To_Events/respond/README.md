@@ -47,3 +47,6 @@ Adding event handlers
     }}>
 
     All of these styles are equivalent. Inline event handlers are convenient for short functions.
+
+Reading props in event handlers 
+    Because event handlers are declared inside of a component, they have access to the component’s props. Here is a button that, when clicked, shows an alert with its message prop:
