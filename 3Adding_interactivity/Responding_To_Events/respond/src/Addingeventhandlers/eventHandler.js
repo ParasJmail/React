@@ -3,6 +3,7 @@ export default function Button(){
         alert('You clicked me.');
     }
 
+
     return(
         <>
         <h1>Adding event handlers</h1>

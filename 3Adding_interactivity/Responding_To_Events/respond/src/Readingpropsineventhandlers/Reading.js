@@ -16,6 +16,8 @@ export default function Toolbar(){
             <AlertButton messsage='Uploading'>
                 Upload Image
             </AlertButton>
+
+            
         </div>
     )
 }
