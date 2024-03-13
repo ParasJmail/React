@@ -113,3 +113,33 @@ Stopping propagation
         4. Since the propagation was stopped, the parent <div>’s onClick handler does not run.
 
     As a result of e.stopPropagation(), clicking on the buttons now only shows a single alert (from the <button>) rather than the two of them (from the <button> and the parent toolbar <div>). Clicking a button is not the same thing as clicking the surrounding toolbar, so stopping the propagation makes sense for this UI.
+
+Passing handlers as alternative to propagation
+
+    Notice how this click handler runs a line of code and then calls the onClick prop passed by the parent:
+
+    function Button({ onClick, children }) {
+        return (
+            <button onClick={e => {
+                e.stopPropagation();
+                onClick();
+            }}>
+                {children}
+            </button>
+        );
+    }
+
+    You could add more code to this handler before calling the parent onClick event handler, too. This pattern provides an alternative to propagation. It lets the child component handle the event, while also letting the parent component specify some additional behavior. Unlike propagation, it’s not automatic. But the benefit of this pattern is that you can clearly follow the whole chain of code that executes as a result of some event.
+
+    If you rely on propagation and it’s difficult to trace which handlers execute and why, try this approach instead.
+
+Preventing default behavior
+
+    Some browser events have default behavior associated with them. For example, a <form> submit event, which happens when a button inside of it is clicked, will reload the whole page by default: defaultBehaviour.js
+
+    You can call e.preventDefault() on the event object to stop this from happening: preventDefaultBehaviour.js
+
+    Don’t confuse e.stopPropagation() and e.preventDefault(). They are both useful, but are unrelated:
+
+e.stopPropagation() stops the event handlers attached to the tags above from firing.
+e.preventDefault() prevents the default browser behavior for the few events that have it.
