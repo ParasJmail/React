@@ -11,7 +11,8 @@ export default function Gallery(){
     let sculpture = sculptureList[index];
 
     return(
-        <>
+        <>  
+            <h1>Using a Regular Varaible which isn't enough</h1>
             <button onClick={handleClick}>
                 Next
             </button>

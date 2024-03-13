@@ -21,3 +21,33 @@ State: A Component's Memory
 
         1. Retain the data between renders.
         2. Trigger React to render the component with new data (re-rendering).
+
+    The useState Hook provides those two things:
+
+        1. A state variable to retain the data between renders.
+        2. A state setter function to update the variable and trigger React to render the component again.
+
+    Adding a state variable
+        To add a state variable, import useState from React at the top of the file:
+
+            import { useState } from 'react';
+
+        Then, replace this line:
+
+            let index = 0;
+
+        with
+
+            const [index, setIndex] = useState(0);
+
+        index is a state variable and setIndex is the setter function.
+
+        The [ and ] syntax here is called array destructuring and it lets you read values from an array. The array returned by useState always has exactly two items.
+
+        This is how they work together in handleClick:
+
+            function handleClick() {
+                setIndex(index + 1);
+            }
+
+        Now clicking the “Next” button switches the current sculpture:
