@@ -46,8 +46,18 @@ Render and Commit
 
     Pitfall
 
-Rendering must always be a pure calculation:
+        Rendering must always be a pure calculation:
 
-Same inputs, same output. Given the same inputs, a component should always return the same JSX. (When someone orders a salad with tomatoes, they should not receive a salad with onions!)
-It minds its own business. It should not change any objects or variables that existed before rendering. (One order should not change anyone else’s order.)
-Otherwise, you can encounter confusing bugs and unpredictable behavior as your codebase grows in complexity. When developing in “Strict Mode”, React calls each component’s function twice, which can help surface mistakes caused by impure functions.
+            * Same inputs, same output. Given the same inputs, a component should always return the same JSX. (When someone orders a salad with tomatoes, they should not receive a salad with onions!)
+            * It minds its own business. It should not change any objects or variables that existed before rendering. (One order should not change anyone else’s order.)
+
+        Otherwise, you can encounter confusing bugs and unpredictable behavior as your codebase grows in complexity. When developing in “Strict Mode”, React calls each component’s function twice, which can help surface mistakes caused by impure functions.
+
+    Step 3: React commits changes to the DOM
+
+        After rendering (calling) your components, React will modify the DOM.
+
+            * For the initial render, React will use the appendChild() DOM API to put all the DOM nodes it has created on screen.
+            * For re-renders, React will apply the minimal necessary operations (calculated while rendering!) to make the DOM match the latest rendering output.
+
+        React only changes the DOM nodes if there’s a difference between renders. For example, here is a component that re-renders with different props passed from its parent every second. Notice how you can add some text into the <input>, updating its value, but the text doesn’t disappear when the component re-renders:
