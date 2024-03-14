@@ -108,3 +108,16 @@ State as a Snapshot
         2. Before the five-second delay ends, you change the value of the “To” field to “Bob”.
 
         What do you expect the alert to display? Would it display, “You said Hello to Alice”? Or would it display, “You said Hello to Bob”? Make a guess based on what you know, and then try it: StateOptions.js
+
+        React keeps the state values “fixed” within one render’s event handlers. You don’t need to worry whether the state has changed while the code is running.
+
+        But what if you wanted to read the latest state before a re-render? You’ll want to use a state updater function, covered on the next page!
+
+    Recap
+        * Setting state requests a new render.
+        * React stores state outside of your component, as if on a shelf.
+        * When you call useState, React gives you a snapshot of the state for that render.
+        * Variables and event handlers don’t “survive” re-renders. Every render has its own event handlers.
+        * Every render (and functions inside it) will always “see” the snapshot of the state that React gave to that render.
+        * You can mentally substitute state in event handlers, similarly to how you think about the rendered JSX.
+        * Event handlers created in the past have the state values from the render in which they were created.
