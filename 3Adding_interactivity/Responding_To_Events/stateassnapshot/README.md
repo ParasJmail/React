@@ -91,4 +91,20 @@ State as a Snapshot
 
         StateWithTime.js
 
+        Surprised? If you use the substitution method, you can see the “snapshot” of the state passed to the alert.
 
+            setNumber(0 + 5);
+            setTimeout(() => {
+                alert(0);
+            }, 3000);
+
+        The state stored in React may have changed by the time the alert runs, but it was scheduled using a snapshot of the state at the time the user interacted with it!
+
+        A state variable’s value never changes within a render, even if its event handler’s code is asynchronous. Inside that render’s onClick, the value of number continues to be 0 even after setNumber(number + 5) was called. Its value was “fixed” when React “took the snapshot” of the UI by calling your component.
+
+        Here is an example of how that makes your event handlers less prone to timing mistakes. Below is a form that sends a message with a five-second delay. Imagine this scenario:
+
+        1. You press the “Send” button, sending “Hello” to Alice.
+        2. Before the five-second delay ends, you change the value of the “To” field to “Bob”.
+
+        What do you expect the alert to display? Would it display, “You said Hello to Alice”? Or would it display, “You said Hello to Bob”? Make a guess based on what you know, and then try it: StateOptions.js
