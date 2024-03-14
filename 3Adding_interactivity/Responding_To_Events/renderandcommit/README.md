@@ -19,3 +19,35 @@ Render and Commit
 
             1. It’s the component’s initial render.
             2. The component’s (or one of its ancestors’) state has been updated.
+
+    Initial render
+
+        When your app starts, you need to trigger the initial render. Frameworks and sandboxes sometimes hide this code, but it’s done by calling createRoot with the target DOM node, and then calling its render method with your component: InitialRender.js
+
+        Try commenting out the root.render() call and see the component disappear!
+
+    Re-renders when state updates
+
+        Once the component has been initially rendered, you can trigger further renders by updating its state with the set function. Updating your component’s state automatically queues a render. (You can imagine these as a restaurant guest ordering tea, dessert, and all sorts of things after putting in their first order, depending on the state of their thirst or hunger.)
+
+    Step 2: React renders your components
+
+    After you trigger a render, React calls your components to figure out what to display on screen. “Rendering” is React calling your components.
+
+        * On initial render, React will call the root component.
+        * For subsequent renders, React will call the function component whose state update triggered the render.
+
+    This process is recursive: if the updated component returns some other component, React will render that component next, and if that component also returns something, it will render that component next, and so on. The process will continue until there are no more nested components and React knows exactly what should be displayed on screen.
+
+    In the following example, React will call Gallery() and  Image() several times: RenderYourComponent.js
+
+    * During the initial render, React will create the DOM nodes for <section>, <h1>, and three <img> tags.
+    * During a re-render, React will calculate which of their properties, if any, have changed since the previous render. It won’t do anything with that information until the next step, the commit phase.
+
+    Pitfall
+
+Rendering must always be a pure calculation:
+
+Same inputs, same output. Given the same inputs, a component should always return the same JSX. (When someone orders a salad with tomatoes, they should not receive a salad with onions!)
+It minds its own business. It should not change any objects or variables that existed before rendering. (One order should not change anyone else’s order.)
+Otherwise, you can encounter confusing bugs and unpredictable behavior as your codebase grows in complexity. When developing in “Strict Mode”, React calls each component’s function twice, which can help surface mistakes caused by impure functions.
