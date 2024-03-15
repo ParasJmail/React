@@ -47,3 +47,67 @@ Updating the same state multiple times before the next render
     It is an uncommon use case, but if you would like to update the same state variable multiple times before the next render, instead of passing the next state value like setNumber(number + 1), you can pass a function that calculates the next state based on the previous one in the queue, like setNumber(n => n + 1). It is a way to tell React to “do something with the state value” instead of just replacing it.
 
     Try incrementing the counter now: UpdateMultiple.js
+
+    Here, n => n + 1 is called an updater function. When you pass it to a state setter:
+
+    1. React queues this function to be processed after all the other code in the event handler has run.
+    2. During the next render, React goes through the queue and gives you the final updated state.
+
+        setNumber(n => n + 1);
+        setNumber(n => n + 1);
+        setNumber(n => n + 1);
+
+    Here’s how React works through these lines of code while executing the event handler:
+
+        1. setNumber(n => n + 1): n => n + 1 is a function. React adds it to a queue.
+        2. setNumber(n => n + 1): n => n + 1 is a function. React adds it to a queue.
+        3. setNumber(n => n + 1): n => n + 1 is a function. React adds it to a queue.
+
+    When you call useState during the next render, React goes through the queue. The previous number state was 0, so that’s what React passes to the first updater function as the n argument. Then React takes the return value of your previous updater function and passes it to the next updater as n, and so on:
+
+        queued update	    n	    returns
+        n => n + 1	        0	    0 + 1 = 1
+        n => n + 1	        1	    1 + 1 = 2
+        n => n + 1	        2	    2 + 1 = 3
+
+    React stores 3 as the final result and returns it from useState.
+
+    This is why clicking “+3” in the above example correctly increments the value by 3.
+
+What happens if you update state after replacing it
+
+    What about this event handler? What do you think number will be in the next render?
+
+        <button onClick={() => {
+            setNumber(number + 5);
+            setNumber(n => n + 1);
+        }}>
+
+    UpdateStateAfterReplacing.js
+
+    Here’s what this event handler tells React to do:
+
+        1. setNumber(number + 5): number is 0, so setNumber(0 + 5). React adds “replace with 5” to its queue.
+        2. setNumber(n => n + 1): n => n + 1 is an updater function. React adds that function to its queue.
+
+    During the next render, React goes through the state queue:
+
+    queued update       n           returns
+    ”replace with 5”	0 (unused)	5
+    n => n + 1	        5	        5 + 1 = 6
+
+    React stores 6 as the final result and returns it from useState.
+
+    Note
+
+        You may have noticed that setState(5) actually works like setState(n => 5), but n is unused!
+
+What happens if you replace state after updating it
+
+    Let’s try one more example. What do you think number will be in the next render?
+
+        <button onClick={() => {
+            setNumber(number + 5);
+            setNumber(n => n + 1);
+            setNumber(42);
+        }}>
