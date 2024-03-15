@@ -62,3 +62,32 @@ Updating Objects in State
             * And render this component again
 
         Notice how the red dot now follows your pointer when you touch or hover over the preview area: TreatStateCorrect.js
+
+    Copying objects with the spread syntax
+
+        In the previous example, the position object is always created fresh from the current cursor position. But often, you will want to include existing data as a part of the new object you’re creating. For example, you may want to update only one field in a form, but keep the previous values for all other fields.
+
+        These input fields don’t work because the onChange handlers mutate the state: CopyObjects.js
+
+        For example, this line mutates the state from a past render:
+
+            person.firstName = e.target.value;
+
+        The reliable way to get the behavior you’re looking for is to create a new object and pass it to setPerson. But here, you want to also copy the existing data into it because only one of the fields has changed:
+
+            setPerson({
+                firstName: e.target.value, // New first name from the input
+                lastName: person.lastName,
+                email: person.email
+            });
+
+        You can use the ... object spread syntax so that you don’t need to copy every property separately.
+
+            setPerson({
+                ...person, // Copy the old fields
+                firstName: e.target.value // But override this one
+            });
+
+        Now the form works!
+
+        Notice how you didn’t declare a separate state variable for each input field. For large forms, keeping all data grouped in an object is very convenient—as long as you update it correctly!
