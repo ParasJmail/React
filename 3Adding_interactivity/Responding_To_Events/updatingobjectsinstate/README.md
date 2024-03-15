@@ -95,3 +95,38 @@ Updating Objects in State
         ObjectSpread.js
 
         Note that the ... spread syntax is “shallow”—it only copies things one level deep. This makes it fast, but it also means that if you want to update a nested property, you’ll have to use it more than once.
+
+    Updating a nested object
+
+        Consider a nested object structure like this:
+
+            const [person, setPerson] = useState({
+                name: 'Niki de Saint Phalle',
+                artwork: {
+                    title: 'Blue Nana',
+                    city: 'Hamburg',
+                    image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+                }
+            });
+
+        If you wanted to update person.artwork.city, it’s clear how to do it with mutation:
+
+            person.artwork.city = 'New Delhi';
+
+        But in React, you treat state as immutable! In order to change city, you would first need to produce the new artwork object (pre-populated with data from the previous one), and then produce the new person object which points at the new artwork:
+
+            const nextArtwork = { ...person.artwork, city: 'New Delhi' };
+            const nextPerson = { ...person, artwork: nextArtwork };
+            setPerson(nextPerson);
+
+        Or, written as a single function call:
+
+            setPerson({
+                ...person, // Copy other fields
+                artwork: { // but replace the artwork
+                    ...person.artwork, // with the same one
+                    city: 'New Delhi' // but in New Delhi!
+                }
+            });
+
+        This gets a bit wordy, but it works fine for many cases: nested.js
