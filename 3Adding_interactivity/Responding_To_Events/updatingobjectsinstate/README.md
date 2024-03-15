@@ -12,22 +12,53 @@ Updating Objects in State
 
     What’s a mutation?
 
-    You can store any kind of JavaScript value in state.
+        You can store any kind of JavaScript value in state.
 
-        const [x, setX] = useState(0);
+            const [x, setX] = useState(0);
 
-    So far you’ve been working with numbers, strings, and booleans. These kinds of JavaScript values are “immutable”, meaning unchangeable or “read-only”. You can trigger a re-render to replace a value:
+        So far you’ve been working with numbers, strings, and booleans. These kinds of JavaScript values are “immutable”, meaning unchangeable or “read-only”. You can trigger a re-render to replace a value:
 
-        setX(5);
+            setX(5);
 
-    The x state changed from 0 to 5, but the number 0 itself did not change. It’s not possible to make any changes to the built-in primitive values like numbers, strings, and booleans in JavaScript.
+        The x state changed from 0 to 5, but the number 0 itself did not change. It’s not possible to make any changes to the built-in primitive values like numbers, strings, and booleans in JavaScript.
 
-    Now consider an object in state:
+        Now consider an object in state:
 
-        const [position, setPosition] = useState({ x: 0, y: 0 });
+            const [position, setPosition] = useState({ x: 0, y: 0 });
 
-    Technically, it is possible to change the contents of the object itself. This is called a mutation:
+        Technically, it is possible to change the contents of the object itself. This is called a mutation:
 
-        position.x = 5;
+            position.x = 5;
 
-    However, although objects in React state are technically mutable, you should treat them as if they were immutable—like numbers, booleans, and strings. Instead of mutating them, you should always replace them.
+        However, although objects in React state are technically mutable, you should treat them as if they were immutable—like numbers, booleans, and strings. Instead of mutating them, you should always replace them.
+
+    Treat state as read-only
+
+        In other words, you should treat any JavaScript object that you put into state as read-only.
+
+        This example holds an object in state to represent the current pointer position. The red dot is supposed to move when you touch or move the cursor over the preview area. But the dot stays in the initial position: TreatState.js
+
+        The problem is with this bit of code.
+
+            onPointerMove={e => {
+                position.x = e.clientX;
+                position.y = e.clientY;
+            }}
+
+        This code modifies the object assigned to position from the previous render. But without using the state setting function, React has no idea that object has changed. So React does not do anything in response. It’s like trying to change the order after you’ve already eaten the meal. While mutating state can work in some cases, we don’t recommend it. You should treat the state value you have access to in a render as read-only.
+
+        To actually trigger a re-render in this case, create a new object and pass it to the state setting function:
+
+            onPointerMove={e => {
+                setPosition({
+                    x: e.clientX,
+                    y: e.clientY
+                });
+            }}
+
+        With setPosition, you’re telling React:
+
+            * Replace position with this new object
+            * And render this component again
+
+        Notice how the red dot now follows your pointer when you touch or hover over the preview area: TreatStateCorrect.js
