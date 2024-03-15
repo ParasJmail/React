@@ -4,6 +4,7 @@ import ObjectSpread from './Copying objects with the spread syntax/ObjectSpread.
 import MovingDot from './Treat state as read-only/TreatState';
 import TreatStateCorrect from './Treat state as read-only/TreatStateCorrect.js';
 import Nested from './Updating a nested object/nested.js';
+import ImmerUse from './Write concise update logic with Immer/UseImmer.js';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Form />
       <ObjectSpread />
       <Nested />
+      <ImmerUse />
     </div>
   );
 }
