@@ -1,5 +1,6 @@
 
 import Form from './Copying objects with the spread syntax/CopyObjects.js';
+import ObjectSpread from './Copying objects with the spread syntax/ObjectSpread.js';
 import MovingDot from './Treat state as read-only/TreatState';
 import TreatStateCorrect from './Treat state as read-only/TreatStateCorrect.js';
 
@@ -9,6 +10,7 @@ function App() {
       <MovingDot />
       <TreatStateCorrect />
       <Form />
+      <ObjectSpread />
     </div>
   );
 }

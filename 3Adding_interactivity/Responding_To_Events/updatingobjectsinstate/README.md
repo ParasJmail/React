@@ -91,3 +91,7 @@ Updating Objects in State
         Now the form works!
 
         Notice how you didn’t declare a separate state variable for each input field. For large forms, keeping all data grouped in an object is very convenient—as long as you update it correctly!
+
+        ObjectSpread.js
+
+        Note that the ... spread syntax is “shallow”—it only copies things one level deep. This makes it fast, but it also means that if you want to update a nested property, you’ll have to use it more than once.
