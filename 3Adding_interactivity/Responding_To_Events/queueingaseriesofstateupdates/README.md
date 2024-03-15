@@ -135,3 +135,19 @@ What happens if you replace state after updating it
         * Any other value (e.g. number 5) adds “replace with 5” to the queue, ignoring what’s already queued.
 
         After the event handler completes, React will trigger a re-render. During the re-render, React will process the queue. Updater functions run during rendering, so updater functions must be pure and only return the result. Don’t try to set state from inside of them or run other side effects. In Strict Mode, React will run each updater function twice (but discard the second result) to help you find mistakes.
+
+Naming conventions
+
+    It’s common to name the updater function argument by the first letters of the corresponding state variable:
+
+    setEnabled(e => !e);
+    setLastName(ln => ln.reverse());
+    setFriendCount(fc => fc * 2);
+
+    If you prefer more verbose code, another common convention is to repeat the full state variable name, like setEnabled(enabled => !enabled), or to use a prefix like setEnabled(prevEnabled => !prevEnabled).
+
+Recap
+
+    * Setting state does not change the variable in the existing render, but it requests a new render.
+    * React processes state updates after event handlers have finished running. This is called batching.
+    * To update some state multiple times in one event, you can use setNumber(n => n + 1) updater function.
