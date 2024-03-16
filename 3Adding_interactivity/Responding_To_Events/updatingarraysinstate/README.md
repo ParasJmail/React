@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+Updating Arrays in State
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+    Arrays are mutable in JavaScript, but you should treat them as immutable when you store them in state. Just like with objects, when you want to update an array stored in state, you need to create a new one (or make a copy of an existing one), and then set state to use the new array.
 
-## Available Scripts
+    You will learn
 
-In the project directory, you can run:
+        * How to add, remove, or change items in an array in React state
+        * How to update an object inside of an array
+        * How to make array copying less repetitive with Immer
 
-### `npm start`
+    Updating arrays without mutation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    In JavaScript, arrays are just another kind of object. Like with objects, you should treat arrays in React state as read-only. This means that you shouldn’t reassign items inside an array like arr[0] = 'bird', and you also shouldn’t use methods that mutate the array, such as push() and pop().
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+    Instead, every time you want to update an array, you’ll want to pass a new array to your state setting function. To do that, you can create a new array from the original array in your state by calling its non-mutating methods like filter() and map(). Then you can set your state to the resulting new array.
 
-### `npm test`
+    Here is a reference table of common array operations. When dealing with arrays inside React state, you will need to avoid the methods in the left column, and instead prefer the methods in the right column:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+                    avoid (mutates the array)	        prefer (returns a new array)
+        adding	    push, unshift	                    concat, [...arr] spread syntax (example)
+        removing	pop, shift, splice	                filter, slice (example)
+        replacing	splice, arr[i] = ... assignment	    map (example)
+        sorting	    reverse, sort	                    copy the array first (example)
 
-### `npm run build`
+    Alternatively, you can use Immer which lets you use methods from both columns.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+        Pitfall
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+            Unfortunately, slice and splice are named similarly but are very different:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+                * slice lets you copy an array or a part of it.
+                * splice mutates the array (to insert or delete items).
 
-### `npm run eject`
+            In React, you will be using slice (no p!) a lot more often because you don’t want to mutate objects or arrays in state. Updating Objects explains what mutation is and why it’s not recommended for state.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    Adding to an array
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+        push() will mutate an array, which you don’t want:
