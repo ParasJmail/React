@@ -35,4 +35,24 @@ Updating Arrays in State
 
     Adding to an array
 
-        push() will mutate an array, which you don’t want:
+        push() will mutate an array, which you don’t want: Add.js
+
+        Instead, create a new array which contains the existing items and a new item at the end. There are multiple ways to do this, but the easiest one is to use the ... array spread syntax:
+
+            setArtists( // Replace the state
+                [ // with a new array
+                    ...artists, // that contains all the old items
+                    { id: nextId++, name: name } // and one new item at the end
+                ]
+            );
+
+        Now it works correctly: AddCorrect.js
+
+        The array spread syntax also lets you prepend an item by placing it before the original ...artists:
+
+            setArtists([
+                { id: nextId++, name: name },
+                ...artists // Put old items at the end
+            ]);
+
+        In this way, spread can do the job of both push() by adding to the end of an array and unshift() by adding to the beginning of an array. Try it in the sandbox above!
