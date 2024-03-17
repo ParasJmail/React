@@ -3,6 +3,7 @@ import './App.css';
 import List from './Adding to an array/Add';
 import ListCorrect from './Adding to an array/AddCorrect';
 import RemoveList from './Removing from an array/Remove';
+import ShapeEditor from './Transforming an array/Transform';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <List />
       <ListCorrect />
       <RemoveList />
+      <ShapeEditor />
     </div>
   );
 }
