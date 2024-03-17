@@ -5,6 +5,7 @@ import ListCorrect from './Adding to an array/AddCorrect';
 import RemoveList from './Removing from an array/Remove';
 import ShapeEditor from './Transforming an array/Transform';
 import CounterList from './Replacing items in an array/Replace';
+import InserList from './Inserting into an array/Insert';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <RemoveList />
       <ShapeEditor />
       <CounterList />
+      <InserList />
     </div>
   );
 }
