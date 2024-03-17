@@ -56,3 +56,20 @@ Updating Arrays in State
             ]);
 
         In this way, spread can do the job of both push() by adding to the end of an array and unshift() by adding to the beginning of an array. Try it in the sandbox above!
+
+    Removing from an array
+
+        The easiest way to remove an item from an array is to filter it out. In other words, you will produce a new array that will not contain that item. To do this, use the filter method, for example: Remove.js
+
+        Click the “Delete” button a few times, and look at its click handler.
+
+            setArtists(
+                artists.filter(a => a.id !== artist.id)
+            );
+
+        Here, artists.filter(a => a.id !== artist.id) means “create an array that consists of those artists whose IDs are different from artist.id”. In other words, each artist’s “Delete” button will filter that artist out of the array, and then request a re-render with the resulting array. Note that filter does not modify the original array.
+
+    Transforming an array
+        If you want to change some or all items of the array, you can use map() to create a new array. The function you will pass to map can decide what to do with each item, based on its data or its index (or both).
+
+        In this example, an array holds coordinates of two circles and a square. When you press the button, it moves only the circles down by 50 pixels. It does this by producing a new array of data using map():
