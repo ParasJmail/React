@@ -119,3 +119,23 @@ Updating Arrays in State
             const artwork = myNextList.find(a => a.id === artworkId);
             artwork.seen = nextSeen; // Problem: mutates an existing item
             setMyList(myNextList);
+
+        Although the myNextList array itself is new, the items themselves are the same as in the original myList array. So changing artwork.seen changes the original artwork item. That artwork item is also in yourList, which causes the bug. Bugs like this can be difficult to think about, but thankfully they disappear if you avoid mutating state.
+
+        You can use map to substitute an old item with its updated version without mutation.
+
+            setMyList(myList.map(artwork => {
+                if (artwork.id === artworkId) {
+                    // Create a *new* object with changes
+                    return { ...artwork, seen: nextSeen };
+                } else {
+                    // No changes
+                    return artwork;
+                }
+            }));
+
+        Here, ... is the object spread syntax used to create a copy of an object.
+
+        With this approach, none of the existing state items are being mutated, and the bug is fixed: UpdateCorrect.js
+
+        In general, you should only mutate objects that you have just created. If you were inserting a new artwork, you could mutate it, but if you’re dealing with something that’s already in state, you need to make a copy.
