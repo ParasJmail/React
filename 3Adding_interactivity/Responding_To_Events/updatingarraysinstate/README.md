@@ -104,3 +104,18 @@ Updating Arrays in State
             setList(nextList);
 
         Although nextList and list are two different arrays, nextList[0] and list[0] point to the same object. So by changing nextList[0].seen, you are also changing list[0].seen. This is a state mutation, which you should avoid! You can solve this issue in a similar way to updating nested JavaScript objects—by copying individual items you want to change instead of mutating them. Here’s how.
+
+    Updating objects inside arrays
+
+        Objects are not really located “inside” arrays. They might appear to be “inside” in code, but each object in an array is a separate value, to which the array “points”. This is why you need to be careful when changing nested fields like list[0]. Another person’s artwork list may point to the same element of the array!
+
+        When updating nested state, you need to create copies from the point where you want to update, and all the way up to the top level. Let’s see how this works.
+
+        In this example, two separate artwork lists have the same initial state. They are supposed to be isolated, but because of a mutation, their state is accidentally shared, and checking a box in one list affects the other list: Update.js
+
+        The problem is in code like this:
+
+            const myNextList = [...myList];
+            const artwork = myNextList.find(a => a.id === artworkId);
+            artwork.seen = nextSeen; // Problem: mutates an existing item
+            setMyList(myNextList);
