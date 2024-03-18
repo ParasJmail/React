@@ -6,6 +6,7 @@ import RemoveList from './Removing from an array/Remove';
 import ShapeEditor from './Transforming an array/Transform';
 import CounterList from './Replacing items in an array/Replace';
 import InserList from './Inserting into an array/Insert';
+import ReverseList from './Making other changes to an array/Reverse';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <ShapeEditor />
       <CounterList />
       <InserList />
+      <ReverseList />
     </div>
   );
 }
