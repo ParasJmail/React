@@ -139,3 +139,30 @@ Updating Arrays in State
         With this approach, none of the existing state items are being mutated, and the bug is fixed: UpdateCorrect.js
 
         In general, you should only mutate objects that you have just created. If you were inserting a new artwork, you could mutate it, but if you’re dealing with something that’s already in state, you need to make a copy.
+
+    Write concise update logic with Immer
+
+        Updating nested arrays without mutation can get a little bit repetitive. Just as with objects:
+
+            * Generally, you shouldn’t need to update state more than a couple of levels deep. If your state objects are very deep, you might want to restructure them differently so that they are flat.
+            * If you don’t want to change your state structure, you might prefer to use Immer, which lets you write using the convenient but mutating syntax and takes care of producing the copies for you.
+
+        Here is the Art Bucket List example rewritten with Immer: WithImmer.js
+
+        Note how with Immer, mutation like artwork.seen = nextSeen is now okay:
+
+            updateMyTodos(draft => {
+                const artwork = draft.find(a => a.id === artworkId);
+                artwork.seen = nextSeen;
+            });
+
+        This is because you’re not mutating the original state, but you’re mutating a special draft object provided by Immer. Similarly, you can apply mutating methods like push() and pop() to the content of the draft.
+
+        Behind the scenes, Immer always constructs the next state from scratch according to the changes that you’ve done to the draft. This keeps your event handlers very concise without ever mutating state.
+
+    Recap
+        * You can put arrays into state, but you can’t change them.
+        * Instead of mutating an array, create a new version of it, and update the state to it.
+        * You can use the [...arr, newItem] array spread syntax to create arrays with new items.
+        * You can use filter() and map() to create new arrays with filtered or transformed items.
+        * You can use Immer to keep your code concise.

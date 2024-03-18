@@ -9,6 +9,7 @@ import InserList from './Inserting into an array/Insert';
 import ReverseList from './Making other changes to an array/Reverse';
 import BucketList from './Updating objects inside arrays/Update';
 import BucketListCorrect from './Updating objects inside arrays/UpdateCorrect';
+import ImmerList from './Write concise update logic with Immer/WithImmer';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <ReverseList />
       <BucketList />
       <BucketListCorrect />
+      <ImmerList />
     </div>
   );
 }
