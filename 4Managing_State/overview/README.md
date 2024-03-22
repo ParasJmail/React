@@ -21,3 +21,17 @@ Managing State
         Here is a quiz form built using React. Note how it uses the status state variable to determine whether to enable or disable the submit button, and whether to show the success message instead.
 
         Reacting.js
+
+    Choosing the state structure
+
+        Structuring state well can make a difference between a component that is pleasant to modify and debug, and one that is a constant source of bugs. The most important principle is that state shouldn’t contain redundant or duplicated information. If there’s unnecessary state, it’s easy to forget to update it, and introduce bugs!
+
+        For example, this form has a redundant fullName state variable:
+
+        Choosing.jsx
+
+        You can remove it and simplify the code by calculating fullName while the component is rendering:
+
+        Choosing2.jsx
+
+        This might seem like a small change, but many bugs in React apps are fixed this way.
