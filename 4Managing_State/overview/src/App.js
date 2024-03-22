@@ -5,6 +5,7 @@ import Choosing from './Choosing the state structure/Choosing';
 import Choosing2 from './Choosing the state structure/Choosing2';
 import Sharing from './Sharing state between components/Sharing';
 import Preserve from './Preserving and resetting state/preserve';
+import PreserveCorrect from './Preserving and resetting state/PreserveCorrect';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Choosing2 />
       <Sharing />
       <Preserve />
+      <PreserveCorrect />
     </div>
   );
 }
