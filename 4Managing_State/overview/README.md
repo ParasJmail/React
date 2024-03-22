@@ -35,3 +35,11 @@ Managing State
         Choosing2.jsx
 
         This might seem like a small change, but many bugs in React apps are fixed this way.
+
+    Sharing state between components
+
+        Sometimes, you want the state of two components to always change together. To do it, remove state from both of them, move it to their closest common parent, and then pass it down to them via props. This is known as “lifting state up”, and it’s one of the most common things you will do writing React code.
+
+        In this example, only one panel should be active at a time. To achieve this, instead of keeping the active state inside each individual panel, the parent component holds the state and specifies the props for its children.
+
+        Sharing.jsx
